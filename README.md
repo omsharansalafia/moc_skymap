@@ -7,7 +7,7 @@ numpy, astropy, mocpy, scipy
 
 # Usage example 
 
-`python
+```python
 
 from moc_skymap import skymap
 from astropy.coordinates import SkyCoord
@@ -25,4 +25,4 @@ plt.plot(r,pr,'-r')
 plt.xlabel('Distance (Mpc)')
 plt.ylabel('Probability density at my position (Mpc-1)')
 plt.show()
-`
+```
