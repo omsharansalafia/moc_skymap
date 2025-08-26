@@ -67,14 +67,20 @@ class skymap:
     
     def distance_posterior(s,position='allsky',res=1000,return_dist_params=False):
         """
+        Posterior probability on source distance at a position or 
+        marginalized over all sky.
+        
         Parameters:
-        - position: if 'allsky', return the marginalized distance posterior; 
-                    otherwise must be either a SkyCoord instance, or 
-                    a string with a sky position in hms,dms; 
-        - res: resolution of the distance vector
-        - return_dust_params: if True, return the DISTMU, DISTSIGMA and DISTNORM parameters
+        -----------
+        - position           : if 'allsky', return the marginalized distance posterior; 
+                               otherwise must be either an astropy SkyCoord instance, 
+                               or a string with a sky position in hh:mm:ss +dd:mm:ss; 
+        - res                : resolution of the distance vector
+        - return_dust_params : if True, return the DISTMU, DISTSIGMA and DISTNORM 
+                               parameters.
         
         Returns:
+        --------
         - r, dp/dr, (DISTMU, DISTSIGMA, DISTNORM)
         """
         
@@ -101,8 +107,9 @@ class skymap:
             DISTSIGMA = s.table['DISTSIGMA'][ipix]
             DISTNORM = s.table['DISTNORM'][ipix]
             
-            
+        # normalize    
         pr/=np.trapz(pr,r)
+        
         if return_dist_params:
             return r,pr,DISTMU,DISTSIGMA,DISTNORM
         else:
@@ -129,7 +136,6 @@ class skymap:
         
     
     def write(s,filename,overwrite=True):
-        
         s.table.write(filename,overwrite=overwrite)
         
         
